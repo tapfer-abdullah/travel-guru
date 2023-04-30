@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "./../../../Recourse/logo.png";
+import { AuthContext } from "../AuthPage/AuthProvider";
 
 const Header = () => {
+  const {user} = useContext(AuthContext);
+  console.log(user)
+
   return (
     <div className="pt-9">
       <div className="navbar bg-transparent">
@@ -79,6 +83,7 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          {/* {user ? <h3>{user}</h3> : ""} */}
           <Link to="/login" className="btn bg-my-primary border-none">Login</Link>
         </div>
       </div>

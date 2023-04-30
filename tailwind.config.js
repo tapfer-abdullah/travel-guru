@@ -22,8 +22,10 @@ export default {
       'silver': '#ecebff',
       'bubble-gum': '#ff77e9',
       'bermuda': '#78dcca',
+      'black' : "#000000",
       "my-primary": "#F9A51A",
-      "warning": "color: rgb(217 119 6)"
+      "warning": "color: rgb(217 119 6)",
+      "danger" : "#ff0000"
     },
   },
   plugins: [require("daisyui")],

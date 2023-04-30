@@ -10,6 +10,7 @@ import Header from "./components/Pages/SharedPages/Header";
 import HomeContents from "./components/Pages/HomeContents";
 import Login from "./components/Pages/AuthPage/Login";
 import Register from "./components/Pages/AuthPage/Register";
+import Booking from "./components/Pages/Booking";
 
   const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ import Register from "./components/Pages/AuthPage/Register";
         {
           path: "register",
           element: <Register></Register>
+        },
+        {
+          path: "/booking",
+          element: <Booking></Booking>
         }
       ]
     },
