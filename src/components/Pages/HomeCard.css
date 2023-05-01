@@ -11,3 +11,8 @@
     font-weight: 600;
     font-size: 25px;
 }
+
+.swiper-slide-active{
+    border: 5px solid yellow;
+    border-radius: 26px;
+}

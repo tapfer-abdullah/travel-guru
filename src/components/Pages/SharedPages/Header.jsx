@@ -1,12 +1,15 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "./../../../Recourse/logo.png";
 import { AuthContext } from "../AuthPage/AuthProvider";
 
 const Header = () => {
   const {user} = useContext(AuthContext);
-  console.log(user)
+  // console.log(user)
+  const location = useLocation();
+  // console.log(location.pathname)
 
   return (
     <div className="pt-9">
@@ -61,18 +64,18 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li className="mx-6">
-              <input
+              {location.pathname != '/destinations' && <input
                 style={{backgroundColor: "rgb(79 79 79 / 60%)"}}
                 type="text"
                 placeholder="Search your Destination..."
                 className="input input-bordered bg-transparent"
-              />
+              />}
             </li>
             <li className="mx-6">
               <Link>News</Link>
             </li>
             <li className="mx-6">
-              <Link>Destination</Link>
+              <Link to= "/destinations">Destination</Link>
             </li>
             <li className="mx-6">
               <Link>Blog</Link>

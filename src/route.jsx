@@ -11,6 +11,7 @@ import HomeContents from "./components/Pages/HomeContents";
 import Login from "./components/Pages/AuthPage/Login";
 import Register from "./components/Pages/AuthPage/Register";
 import Booking from "./components/Pages/Booking";
+import Destinations from "./components/Pages/Destinations";
 
   const router = createBrowserRouter([
     {
@@ -30,11 +31,17 @@ import Booking from "./components/Pages/Booking";
           element: <Register></Register>
         },
         {
-          path: "/booking",
-          element: <Booking></Booking>
+          path: "/booking/:id",
+          element: <Booking></Booking>,
+          loader: ({params}) => fetch(`http://localhost:5000/destination/${params.id}`)
         }
       ]
     },
+    {
+      path: "/destinations",
+      element: <Destinations></Destinations>,
+      loader: () => fetch("http://localhost:5000/destinations")
+    }
   ]);
 
   export default router;

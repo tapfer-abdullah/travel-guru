@@ -1,14 +1,14 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination" ;
-
-// import "./styles.css";
 
 // import required modules
 import { Pagination } from "swiper";
@@ -20,11 +20,43 @@ import imgSund from "./../../Recourse/images/sundorbon.png"
 import imgSre from "./../../Recourse/images/Sreemongol.png"
 import imgSaj from "./../../Recourse/images/Sajek.png"
 import { Link } from "react-router-dom";
+import { DestinationData } from "./HomeContents";
 
 const HomeCards = () => {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const {setSingleDest, setLoading, loading} = useContext(DestinationData)
+
+  const [data, setData] = useState([]);
+  useEffect( () =>{
+    fetch("http://localhost:5000/destinations")
+    .then(res => res.json())
+    .then(info => setData(info))
+    setLoading(false)
+  } , [])
+
+  const params = {
+    onSlideChange: (swiper) => {
+      setCurrentSlideIndex(swiper.activeIndex);
+    },
+  };
+    console.log(currentSlideIndex, data)
+
+  useEffect(() =>{
+    const dd = data.find(f => f.id == currentSlideIndex)
+    setSingleDest(dd)
+    
+    console.log(dd)
+  } , [currentSlideIndex, loading])
+
+  
+
   return (
     <div>
+      <div>
+        {/* {currentSlideIndex} */}
+      </div>
       <Swiper
+      {...params}
         slidesPerView={3}
         centeredSlides={true}
         spaceBetween={30}
@@ -34,26 +66,37 @@ const HomeCards = () => {
         }}
         modules={[Pagination]}
         className="mySwiper"
+        // onSlideChange={() => console.log('slide change')}
       >
-        <SwiperSlide className="swipperImg">
+
+        {
+          data.map(d => <SwiperSlide key={d.id} className="swipperImg rounded-2xl">
+            <img className="w-full h-full rounded-2xl" src={d.img} alt="" />
+            <h3 className="swipperImgTitle"><Link>{d.title}</Link></h3>
+
+            {/* {setActive(d.id)} */}
+          </SwiperSlide>)
+        }
+
+        {/* <SwiperSlide className="swipperImg rounded-2xl">
             <img className="w-full h-full rounded-2xl" src={imgCox} alt="" />
             <h3 className="swipperImgTitle"><Link>COX'S BAZAR</Link></h3>
         </SwiperSlide>
 
-        <SwiperSlide className="swipperImg">
-            <img className="w-full h-full" src={imgSre} alt="" />
+        <SwiperSlide className="swipperImg rounded-2xl">
+            <img className="w-full h-full rounded-2xl" src={imgSre} alt="" />
             <h3 className="swipperImgTitle"><Link>SREEMANGAL</Link></h3>
         </SwiperSlide>
 
-        <SwiperSlide className="swipperImg">
-            <img className="w-full h-full" src={imgSund} alt="" />
+        <SwiperSlide className="swipperImg rounded-2xl">
+            <img className="w-full h-full rounded-2xl" src={imgSund} alt="" />
             <h3 className="swipperImgTitle"><Link>SUNDARBANS</Link></h3>
         </SwiperSlide>
 
-        <SwiperSlide className="swipperImg">
-            <img className="w-full h-full" src={imgSaj} alt="" />
+        <SwiperSlide className="swipperImg rounded-2xl">
+            <img className="w-full h-full rounded-2xl" src={imgSaj} alt="" />
             <h3 className="swipperImgTitle"><Link>SAJEK</Link></h3>
-        </SwiperSlide>
+        </SwiperSlide> */}
         
       </Swiper>
     </div>

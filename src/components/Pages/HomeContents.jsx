@@ -1,25 +1,57 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeCards from "./HomeCards";
 
+export const DestinationData = createContext();
+
 const HomeContents = () => {
+  const [loading, setLoading] = useState(true);
+  const [singleDest, setSingleDest] = useState(null);
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    setData(singleDest);
+  }, [singleDest, loading]);
+
+  const info = {
+    setSingleDest,
+    setLoading,
+    loading,
+  };
+
+  // console.log(singleDest)
   return (
-    <div className="mt-32 grid grid-cols-2 gap-3">
-      <div>
-        <h1 className="text-8xl font-semibold">Cox's bazar</h1>
-        <p className="my-6">
-          Cox's Bazar is a city, fishing port, tourism centre and district
-          headquarters in southeastern Bangladesh. It is famous mostly for its
-          long natural sandy beach, and it ...
-        </p>
-        <Link to="/booking">
-          <button className="btn bg-my-primary border-none">Booking</button>
-        </Link>
-      </div>
-      <div>
-        <HomeCards></HomeCards>
+    <div>
+      <div className="mt-32 grid grid-cols-2 gap-3">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <h1 className="text-8xl font-semibold">{data?.title}</h1>
+            <p className="my-6">
+              {data?.description.length > 250 ? (
+                <>
+                  {data?.description.slice(0, 250)}
+                  <Link title="Learn more" to={`/booking/${data.id}`}>....</Link>
+                </>
+              ) : (
+                data?.description
+              )}
+            </p>
+            {data &&
+            <Link to={`/booking/${data.id}`}>
+              <button className="btn bg-my-primary border-none">Booking</button>
+            </Link>
+            }
+          </div>
+        )}
+        <div>
+          <DestinationData.Provider value={info}>
+            <HomeCards></HomeCards>
+          </DestinationData.Provider>
+        </div>
       </div>
     </div>
   );

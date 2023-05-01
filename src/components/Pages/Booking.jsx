@@ -1,14 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Booking = () => {
+    const singleDest = useLoaderData();
+    console.log(singleDest)
     return (
-        <div className='mt-32 grid grid-cols-2 gap-3'>
+        <div className='mt-14 grid grid-cols-2 gap-3'>
             <div>
-            <h1 className='text-8xl font-semibold text-white'>Cox's bazar</h1>
-                <p className='my-6 text-white'>Cox's Bazar is a city, fishing port, tourism centre and district headquarters in southeastern Bangladesh. It is famous mostly for its long natural sandy beach, and it ...</p>
+            <h1 className='text-8xl font-semibold text-white'>{singleDest?.title}</h1>
+                <p className='my-6 text-white'>{singleDest?.description}</p>
             </div>
 
             <div>
