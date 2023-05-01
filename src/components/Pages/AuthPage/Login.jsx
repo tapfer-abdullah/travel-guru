@@ -65,7 +65,7 @@ const Login = () => {
         <input
           className="btn bg-my-primary border-none w-full"
           type="submit"
-          value="Register"
+          value="Log in"
         />
         {/* <button className='w-full'>
                     <Link className="btn bg-my-primary border-none w-full">Log in</Link>

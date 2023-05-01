@@ -6,10 +6,19 @@ import logo from "./../../../Recourse/logo.png";
 import { AuthContext } from "../AuthPage/AuthProvider";
 
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const {user, Logout} = useContext(AuthContext);
   // console.log(user)
   const location = useLocation();
-  // console.log(location.pathname)
+
+  const handleLogOut = () =>{
+    Logout()
+    .then(() =>{
+
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
 
   return (
     <div className="pt-9">
@@ -86,8 +95,10 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          {/* {user ? <h3>{user}</h3> : ""} */}
-          <Link to="/login" className="btn bg-my-primary border-none">Login</Link>
+        {user && <h3 className="mx-2">{user?.email}</h3>}
+          {user ? <Link onClick={handleLogOut} className="btn bg-my-primary border-none">Log out</Link>
+          :
+          <Link to="/login" className="btn bg-my-primary border-none">Login</Link>}
         </div>
       </div>
     </div>
