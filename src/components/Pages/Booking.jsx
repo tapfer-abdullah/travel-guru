@@ -9,7 +9,7 @@ const Booking = () => {
     return (
         <div className='mt-14 grid grid-cols-2 gap-3'>
             <div>
-            <h1 className='text-8xl font-semibold text-white'>{singleDest?.title}</h1>
+            <h1 className='text-6xl font-semibold text-white'>{singleDest?.title}</h1>
                 <p className='my-6 text-white'>{singleDest?.description}</p>
             </div>
 

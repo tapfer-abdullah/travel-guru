@@ -6,11 +6,11 @@ import Header from "./SharedPages/Header";
 const Home = () => {
   return (
     <div
-      style={{ height: "100vh" }}
-      className=" bg-bg-rectangle text-white bg-no-repeat bg-cover bg-center bg-fixed"
+      style={{ height: "100%", minHeight: "100vh" }}
+      className=" bg-bg-rectangle text-white bg-no-repeat bg-fixed bg-center bg-cover "
     >
       <div
-       style={{backgroundColor: "rgb(0 0 0 / 60%)"}}
+       style={{backgroundColor: "rgb(0 0 0 / 60%)", minHeight: "100vh" }}
        className="px-3 md:px-32 h-full w-full"
        >
         <Header></Header>

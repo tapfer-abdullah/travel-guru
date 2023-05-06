@@ -12,7 +12,12 @@
     font-size: 25px;
 }
 
-.swiper-slide-active{
+/* .swiper-slide-active{
+    border: 5px solid yellow;
+    border-radius: 26px;
+} */
+
+.my-active{
     border: 5px solid yellow;
     border-radius: 26px;
 }

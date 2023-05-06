@@ -21,7 +21,7 @@ const Header = () => {
   }
 
   return (
-    <div className="pt-9">
+    <div className="pt-5">
       <div className="navbar bg-transparent">
         <div className="navbar-start">
           <div className="dropdown">

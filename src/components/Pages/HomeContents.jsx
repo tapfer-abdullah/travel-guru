@@ -12,7 +12,10 @@ const HomeContents = () => {
 
   const [data, setData] = useState(null);
   useEffect(() => {
+    setLoading(true);
+
     setData(singleDest);
+    setLoading(false);
   }, [singleDest, loading]);
 
   const info = {
@@ -24,12 +27,18 @@ const HomeContents = () => {
   // console.log(singleDest)
   return (
     <div>
-      <div className="mt-32 grid grid-cols-2 gap-3">
-        {loading ? (
-          <p>Loading...</p>
+      <div className="mt-32 grid grid-cols-1 md:grid-cols-2 gap-3">
+        {!singleDest? (
+          <div>
+            <h1 className="text-7xl font-semibold">Travel Guru</h1>
+            <p className="my-6">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia officia aut eaque optio facilis molestias aliquam dolorem ut, repellat exercitationem.</p>
+            <Link to={`/destinations`}>
+              <button className="btn bg-my-primary border-none">Explore Destinations</button>
+            </Link>
+          </div>
         ) : (
           <div>
-            <h1 className="text-8xl font-semibold">{data?.title}</h1>
+            <h1 className="text-7xl font-semibold">{data?.title}</h1>
             <p className="my-6">
               {data?.description.length > 250 ? (
                 <>
@@ -42,7 +51,7 @@ const HomeContents = () => {
             </p>
             {data &&
             <Link to={`/booking/${data.id}`}>
-              <button className="btn bg-my-primary border-none">Booking</button>
+              <button className="btn bg-my-primary border-none">Booking to {data?.title}</button>
             </Link>
             }
           </div>

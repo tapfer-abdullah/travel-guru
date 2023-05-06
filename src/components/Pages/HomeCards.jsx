@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { DestinationData } from "./HomeContents";
 
 const HomeCards = () => {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(-1);
   const {setSingleDest, setLoading, loading} = useContext(DestinationData)
 
   const [data, setData] = useState([]);
@@ -48,13 +48,12 @@ const HomeCards = () => {
     console.log(dd)
   } , [currentSlideIndex, loading])
 
-  
+  const handleClick = (id) =>{
+    setCurrentSlideIndex(id)
+  }
 
   return (
     <div>
-      <div>
-        {/* {currentSlideIndex} */}
-      </div>
       <Swiper
       {...params}
         slidesPerView={3}
@@ -67,18 +66,23 @@ const HomeCards = () => {
         modules={[Pagination]}
         className="mySwiper"
         // onSlideChange={() => console.log('slide change')}
+        // onClick={handleClick}
       >
 
         {
-          data.map(d => <SwiperSlide key={d.id} className="swipperImg rounded-2xl">
+          data.map(d => <SwiperSlide 
+          key={d.id} 
+          onClick={() => handleClick(d.id)} 
+          className= {`swipperImg rounded-2xl ${d.id == currentSlideIndex && "my-active"}`}
+          >
             <img className="w-full h-full rounded-2xl" src={d.img} alt="" />
             <h3 className="swipperImgTitle"><Link>{d.title}</Link></h3>
 
-            {/* {setActive(d.id)} */}
           </SwiperSlide>)
         }
 
-        {/* <SwiperSlide className="swipperImg rounded-2xl">
+        <span>
+          {/* <SwiperSlide className="swipperImg rounded-2xl">
             <img className="w-full h-full rounded-2xl" src={imgCox} alt="" />
             <h3 className="swipperImgTitle"><Link>COX'S BAZAR</Link></h3>
         </SwiperSlide>
@@ -97,6 +101,7 @@ const HomeCards = () => {
             <img className="w-full h-full rounded-2xl" src={imgSaj} alt="" />
             <h3 className="swipperImgTitle"><Link>SAJEK</Link></h3>
         </SwiperSlide> */}
+        </span>
         
       </Swiper>
     </div>

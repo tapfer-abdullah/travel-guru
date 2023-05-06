@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'bg-rectangle': 'url("./src/Recourse/images/Rectangle 1.png")',
+        'bg-rectangle': 'url("/src/Recourse/images/Rectangle 1.png")',
       },
     },
     colors: {
